@@ -12,7 +12,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 SELECTED_CLASSES = [1, 5, 8]
 
 # Numero di epoche
-EPOCHS = 20   # <-- MODIFICA QUI
+EPOCHS = 10   # <-- MODIFICA QUI
 
 # Iperparametri
 BATCH_SIZE = 32

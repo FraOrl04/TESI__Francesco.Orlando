@@ -15,6 +15,11 @@ from src.confusion import compute_confusion_matrix
 from src.classification_report_gen import generate_classification_report
 from src.visualize_filters import visualize_filters, visualize_feature_maps
 from src.show_examples import show_examples
+from src.gradcam import generate_gradcam_examples
+from src.tsne_plot import plot_tsne
+from src.error_breakdown import plot_error_breakdown
+from src.roc_pr_curves import plot_roc_curves, plot_pr_curves
+from src.dataset_analysis import plot_class_distribution
 
 
 def main():
@@ -67,6 +72,9 @@ def main():
     test_loss, test_acc = evaluate(model, test_loader, criterion)
     print(f"\nTest Loss: {test_loss:.4f} | Test Acc: {test_acc:.2f}%")
 
+    # Ottieni il numero di classi dal modello
+    num_classes = model.fc2.out_features
+
     # Genera grafici
     print("\nGenerazione grafici...")
     plot_metrics("training_history.npz", out_prefix="galaxy10")
@@ -88,8 +96,34 @@ def main():
     example_img, _ = next(iter(test_loader))
     example_img = example_img[0]  # prima immagine del batch
     visualize_feature_maps(model, example_img, out_prefix="featuremap")
+
+    # Esempi corretti e sbagliati
     print("Generazione esempi corretti e sbagliati...")
     show_examples(model, test_loader, out_prefix="examples")
+
+    # GradCAM
+    print("Generazione GradCAM examples...")
+    generate_gradcam_examples(model, test_loader, target_layer=model.conv4, out_prefix="gradcam", num_examples=8)
+
+    # T-SNE plot
+    print("Generazione t-SNE plot...")
+    plot_tsne(model, test_loader, feature_layer=model.fc1, out_path="tsne_plot.png")
+
+    # Error breakdown
+    print("Generazione error breakdown plot...")
+    plot_error_breakdown(model, test_loader, out_path="error_breakdown.png")
+
+    # ROC curves
+    print("Generazione ROC curves...")
+    plot_roc_curves(model, test_loader, num_classes=num_classes, out_path="roc_curves.png")
+
+    # Precision-Recall curves
+    print("Generazione Precision-Recall curves...")
+    plot_pr_curves(model, test_loader, num_classes=num_classes, out_path="pr_curves.png")
+
+    # Class distribution (train, val e test separatamente)
+    print("Generazione class distribution plot...")
+    plot_class_distribution(test_ds, out_path="class_distribution.png")
 
     print("\nTutto completato! File generati:")
     print("- galaxy10_loss.png")
@@ -98,6 +132,14 @@ def main():
     print("- classification_report.txt")
     print("- filters_layerX.png")
     print("- featuremap_layerX.png")
+    print("- examples_correct.png")
+    print("- examples_wrong.png")
+    print("- gradcam_*.png")
+    print("- tsne_plot.png")
+    print("- error_breakdown.png")
+    print("- roc_curves.png")
+    print("- pr_curves.png")
+    print("- class_distribution.png")
     print("- best_model_decals.pth")
     print("- training_history.npz")
 
