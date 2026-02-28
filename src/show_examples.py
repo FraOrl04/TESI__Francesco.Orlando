@@ -1,6 +1,6 @@
 import torch
 import matplotlib.pyplot as plt
-from config import DEVICE, SELECTED_CLASSES
+from .config import DEVICE, SELECTED_CLASSES
 
 def show_examples(model, loader, out_prefix="examples"):
     model.eval()

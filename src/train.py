@@ -1,7 +1,7 @@
 import torch
 from torch.cuda.amp import autocast, GradScaler
 from tqdm import tqdm
-from config import DEVICE
+from .config import DEVICE
 
 scaler = GradScaler()
 

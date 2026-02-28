@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from history import TrainingHistory
+from .history import TrainingHistory
 
 def plot_metrics(history_path="training_history.npz", out_prefix="plot"):
     hist = TrainingHistory.load(history_path)

@@ -3,8 +3,7 @@ from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 from astroNN.datasets import load_galaxy10
 from PIL import Image
-from config import SELECTED_CLASSES, IMG_SIZE
-
+from .config import SELECTED_CLASSES, IMG_SIZE
 class GalaxyDataset(Dataset):
     def __init__(self, images, labels, transform=None):
         self.images = images

@@ -1,5 +1,5 @@
 from torch.utils.data import random_split, DataLoader
-from config import BATCH_SIZE, NUM_WORKERS, DEVICE
+from .config import BATCH_SIZE, NUM_WORKERS, DEVICE
 
 def split_dataset(dataset):
     total = len(dataset)

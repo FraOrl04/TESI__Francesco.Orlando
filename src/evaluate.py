@@ -1,6 +1,6 @@
 import torch
 from tqdm import tqdm
-from config import DEVICE
+from .config import DEVICE
 
 def evaluate(model, loader, criterion):
     model.eval()
