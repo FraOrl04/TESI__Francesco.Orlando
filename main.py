@@ -25,7 +25,7 @@ from src.dataset_analysis import plot_class_distribution
 def main():
     print(f"Using device: {DEVICE}")
 
-    # Carica dataset filtrato (Galaxy10 DECals, classi scelte)
+    # Carica dataset filtrato
     dataset = load_filtered_dataset()
     train_ds, val_ds, test_ds = split_dataset(dataset)
 

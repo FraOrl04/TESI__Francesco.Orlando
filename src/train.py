@@ -15,7 +15,6 @@ def train_one_epoch(model, loader, optimizer, criterion):
 
         optimizer.zero_grad()
 
-        # Mixed precision solo se siamo su GPU
         with autocast(enabled=(DEVICE == "cuda")):
             outputs = model(data)
             loss = criterion(outputs, targets)

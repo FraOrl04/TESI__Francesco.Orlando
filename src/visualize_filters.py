@@ -53,7 +53,6 @@ def visualize_feature_maps(model, image, out_prefix="featuremap"):
 
         fmap = x.detach().cpu()
 
-        # Prendi solo le prime 16 feature map per non esagerare
         fmap = fmap[0, :16, :, :]
 
         grid = make_grid(fmap.unsqueeze(1), nrow=4, normalize=True, padding=1)

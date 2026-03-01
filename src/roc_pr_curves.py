@@ -1,4 +1,3 @@
-# src/roc_pr_curves.py
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,7 +24,7 @@ def get_logits_and_labels(model, dataloader, num_classes):
 def plot_roc_curves(model, dataloader, num_classes, class_names=None, out_path="roc_curves.png"):
     logits, labels = get_logits_and_labels(model, dataloader, num_classes)
     y_true = np.eye(num_classes)[labels]  # one-hot
-    y_score = logits  # se hai softmax, puoi applicarlo, ma per ROC non è obbligatorio
+    y_score = logits
 
     plt.figure(figsize=(8, 8))
     for c in range(num_classes):
