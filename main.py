@@ -20,11 +20,11 @@ from src.tsne_plot import plot_tsne
 from src.error_breakdown import plot_error_breakdown
 from src.roc_pr_curves import plot_roc_curves, plot_pr_curves
 from src.dataset_analysis import plot_class_distribution
-
+from src.config import SELECTED_CLASSES
 
 def main():
     print(f"Using device: {DEVICE}")
-
+    num_classes = len(SELECTED_CLASSES)
     # Carica dataset filtrato
     dataset = load_filtered_dataset()
     train_ds, val_ds, test_ds = split_dataset(dataset)
@@ -38,7 +38,7 @@ def main():
     test_loader = make_loader(test_ds, shuffle=False)
 
     # Modello, loss, optimizer
-    model = GalaxyCNN().to(DEVICE)
+    model = GalaxyCNN(num_classes=num_classes).to(DEVICE)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=LR)
 
