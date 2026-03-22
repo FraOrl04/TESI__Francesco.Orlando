@@ -35,7 +35,7 @@ class GalaxyCNN(nn.Module):
 
         self.dropout = nn.Dropout(0.4)
 
-        self.fc1 = nn.Linear(128 * 16 * 16, 256)
+        self.fc1 = nn.Linear(128 * 8 * 8, 256)
         self.fc2 = nn.Linear(256, num_classes)
 
     def forward(self, x):
